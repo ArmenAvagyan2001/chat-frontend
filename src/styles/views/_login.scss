@@ -1,0 +1,71 @@
+.login, .register, .forgot_password, .reset_password {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  & > .component {
+    background: rgba(255, 255, 255);
+    position: relative;
+    width: 400px;
+    border: 2px solid rgb(216 89 140);
+
+    & > .icon {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0 0 0;
+
+      & > img {
+        width: 300px;
+      }
+    }
+
+    & > .login_form, .register_form, .forgot_form, .reset_form {
+      padding: 25px;
+      margin: 20px 0;
+      position: relative;
+
+      .error_message {
+        font-size: 15px;
+        color: red;
+        text-align: center;
+        margin: 20px 0;
+        transition: all 0.1s linear;
+      }
+
+      & > select {
+        width: 100%;
+        border: 2px solid rgb(216 89 140);
+        padding: 10px 10px;
+
+        &:focus {
+          border: none;
+        }
+      }
+
+
+
+      & > .or {
+        position: relative;
+
+        & > p {
+          position: absolute;
+          top: -10px;
+          right: 45%;
+          background: #ffffff;
+          padding: 0 10px;
+        }
+      }
+
+      & > .registration, .forgotPassword {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+        & > a {
+          color: #0095F6;
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+}

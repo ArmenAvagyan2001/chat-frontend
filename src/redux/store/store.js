@@ -21,7 +21,5 @@ const store = createStore(
     applyMiddleware(...middleware)
 );
 
-const persistor = persistStore(store);
-
-export { persistor }
+export const persistor = persistStore(store);
 export default store;

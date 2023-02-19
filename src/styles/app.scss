@@ -1,0 +1,16 @@
+@import "src/styles/globals/reset";
+@import "src/styles/globals/variables";
+@import "src/styles/globals/breakpoints";
+@import "src/styles/globals/typography";
+
+// components
+@import "src/styles/components/customs/button_custom";
+@import "src/styles/components/customs/input_custom";
+@import "src/styles/components/authLayout";
+@import "src/styles/components/header";
+
+//views
+@import "src/styles/views/login";
+@import "src/styles/views/rooms";
+@import "src/styles/views/room";
+@import "src/styles/views/search";

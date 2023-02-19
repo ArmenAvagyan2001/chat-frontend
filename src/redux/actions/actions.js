@@ -1,21 +1,15 @@
 import {LOGIN, SET_USER, LOGOUT} from "./types";
 
 
-export const login = () => dispatch => {
+export const login = (user) => dispatch => {
     dispatch({
-        type: LOGIN
+        type: LOGIN,
+        payload: {user}
     })
 }
 
 export const logout = () => dispatch => {
     dispatch({
         type: LOGOUT
-    })
-}
-
-export const setUser = (user) => dispatch => {
-    dispatch({
-        type: SET_USER,
-        user
     })
 }

@@ -1,0 +1,45 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > .component {
+    width: 500px;
+    height: 100vh;
+    box-shadow: 1px 0 11px 1px rgba(0,0,0,0.88);
+
+    & > .searchForm {
+      margin: 20px 0;
+    }
+
+    & > .users {
+      & > .user {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        width: 100%;
+
+        & > div {
+          padding: 0 10px;
+          & > p {
+            color: rgba(0, 0, 0, 0.4);
+          }
+          & > img {
+            width: 50px;
+          }
+        }
+
+        & > .settings {
+          & > button {
+            background: transparent;
+            border: none;
+
+            & > i {
+              font-size: 22px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
