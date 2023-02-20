@@ -32,6 +32,14 @@ const SendMessageForm = ({roomId, socket, users, setMessages, current}) => {
         setMessage(e.target.value)
     }
 
+    const handleKeyDown = () => {
+        socket.current.emit('typing', {isTyping: true, users: allUsers, writer: authUser})
+    }
+
+    const handleKeyUp = () => {
+        socket.current.emit('typing', {isTyping: false, users: allUsers, writer: authUser})
+    }
+
     return (
         <div className='sendMessageForm'>
             {!!message.length && (
@@ -39,7 +47,12 @@ const SendMessageForm = ({roomId, socket, users, setMessages, current}) => {
                     <i className="fa fa-send"></i>
                 </button>
             )}
-            <textarea value={message} onChange={handleChange} placeholder='Message...' />
+            <textarea value={message}
+                      onChange={handleChange}
+                      placeholder='Message...'
+                      onKeyDown={handleKeyDown}
+                      onKeyUp={handleKeyUp}
+            />
         </div>
     );
 };

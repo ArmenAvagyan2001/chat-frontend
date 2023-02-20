@@ -5,6 +5,7 @@ import SendMessageForm from "./SendMessageForm";
 import Message from "./Message";
 import {io} from 'socket.io-client'
 import {useSelector} from "react-redux";
+import Typing from "./Typing";
 
 const Room = () => {
 
@@ -82,6 +83,7 @@ const Room = () => {
                         })}
                         <div ref={ref}/>
                     </div>
+                    <Typing socket={socket} />
                     <SendMessageForm roomId={params.id} socket={socket} users={users} setMessages={setMessages} current={ref.current} />
                 </div>
             </div>
