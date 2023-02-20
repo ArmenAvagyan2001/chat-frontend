@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import $api from "../../http";
 import SendMessageForm from "./SendMessageForm";
 import Message from "./Message";
@@ -12,10 +12,11 @@ const Room = () => {
     const socket = useRef(io('http://localhost:5000'))
     const ref = useRef(null);
     const params = useParams()
+    const navigate = useNavigate()
     const [messages, setMessages] = useState([])
     const [users, setUsers] = useState([])
     const [page, setPage] = useState(0)
-    const [limit, setLimit] = useState(20)
+    const [limit] = useState(20)
     const [showPaginationButton, setShowPaginationButton] = useState(true)
     const [loading, setLoading] = useState(false)
 
@@ -41,6 +42,10 @@ const Room = () => {
         })
     }
 
+    const backNavigate = () => {
+        navigate(-1)
+    }
+
     useEffect(() => {
         getMessages(true)
     }, [])
@@ -59,16 +64,30 @@ const Room = () => {
 
 
     return (
-        <div className='room'>
-            <div className='messages'>
-                {!loading && showPaginationButton && <div onClick={() => getMessages(false)}>get more messages</div>}
-                {messages.sort(sortMessages).map((message, index) => {
-                    return <Message key={index} message={message} />
-                })}
-                <div ref={ref}/>
+        <div className='authLayout'>
+            <div>
+                <div className='header'>
+                    <div className="icon">
+                        <i className='fa fa-arrow-left' onClick={backNavigate} />
+                    </div>
+                    <div className="settings">
+
+                    </div>
+                </div>
+                <div className='room'>
+                    <div className='messages'>
+                        {!loading && showPaginationButton && <div className='pagination' onClick={() => getMessages(false)}>get more messages</div>}
+                        {messages.sort(sortMessages).map((message, index) => {
+                            return <Message key={index} message={message} />
+                        })}
+                        <div ref={ref}/>
+                    </div>
+                    <SendMessageForm roomId={params.id} socket={socket} users={users} setMessages={setMessages} current={ref.current} />
+                </div>
             </div>
-            <SendMessageForm roomId={params.id} socket={socket} users={users} setMessages={setMessages} current={ref.current} />
+
         </div>
+
     );
 };
 

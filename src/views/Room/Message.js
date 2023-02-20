@@ -8,8 +8,14 @@ const Message = ({message}) => {
     return (
         <div className={`message-component ${user.id === message.sender._id ? "sender" : "host"}`}>
             <div>
-                <img src={message.sender.avatar || require('../../images/maleAvatar.png')} alt="avatar"/>
-                <p>{message.message}</p>
+                <div>
+                    <img src={message.sender.avatar || require('../../images/maleAvatar.png')} alt="avatar"/>
+                </div>
+                <div>
+                    <h1>{message.sender.firstName} {message.sender.lastName}</h1>
+                    <p>{message.message}</p>
+                </div>
+
             </div>
         </div>
     );

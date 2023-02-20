@@ -21,8 +21,8 @@ function App() {
                         <Route path='*' element={<Navigate to='/'/>} />
                         <Route path='/' element={<AuthLayout />} >
                             <Route index element={<Rooms />}/>
-                            <Route path='room/:id' element={<Room />} />
                         </Route>
+                        <Route path='room/:id' element={<Room />} />
                         <Route path='search' element={<Search />} />
 
                     </>
@@ -32,8 +32,8 @@ function App() {
                         <Route path='registration' element={<Register />}/>
                         <Route path='forgot-password' element={<ForgotPassword />}/>
                         <Route path='reset-password/:link' element={<ResetPassword />}/>
-                    </>}
-
+                    </>
+                }
             </Routes>
 
     );

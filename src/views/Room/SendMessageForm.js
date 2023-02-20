@@ -23,7 +23,7 @@ const SendMessageForm = ({roomId, socket, users, setMessages, current}) => {
         $api.post('/api/messages', data)
             .then(res => {
                 setMessages(prev => [...prev, res.data])
-                socket.current.emit('send-message', {message: res.data, to: allUsers[0].id})
+                socket.current.emit('send-message', {message: res.data, users: allUsers})
                 setTimeout(() => current?.scrollIntoView({behavior: 'smooth'}), 0)
             })
     }
@@ -34,10 +34,12 @@ const SendMessageForm = ({roomId, socket, users, setMessages, current}) => {
 
     return (
         <div className='sendMessageForm'>
-            <button onClick={handleSendMessage}>
-                <i className="fa fa-send"></i>
-            </button>
-            <textarea value={message} onChange={handleChange} />
+            {!!message.length && (
+                <button onClick={handleSendMessage}>
+                    <i className="fa fa-send"></i>
+                </button>
+            )}
+            <textarea value={message} onChange={handleChange} placeholder='Message...' />
         </div>
     );
 };
