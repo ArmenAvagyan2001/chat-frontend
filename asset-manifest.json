@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f0236354.css",
+    "main.js": "/static/js/main.7c95e74b.js",
+    "static/media/WorkSans-Light.woff2": "/static/media/WorkSans-Light.c4552ecffdc2fd939380.woff2",
+    "static/media/WorkSans-Medium.woff2": "/static/media/WorkSans-Medium.afc47610c59ee8ebad2f.woff2",
+    "static/media/WorkSans-Bold.woff2": "/static/media/WorkSans-Bold.e5f8c2aee7b402d2ca46.woff2",
+    "static/media/WorkSans-Regular.woff2": "/static/media/WorkSans-Regular.dccde01ecc87e6bc7fe6.woff2",
+    "static/media/WorkSans-Bold.woff": "/static/media/WorkSans-Bold.82f129b9afdd7afa09d6.woff",
+    "static/media/WorkSans-Medium.woff": "/static/media/WorkSans-Medium.2c984a338875ad344f51.woff",
+    "static/media/WorkSans-Light.woff": "/static/media/WorkSans-Light.025428998470192ca8fe.woff",
+    "static/media/WorkSans-Regular.woff": "/static/media/WorkSans-Regular.91a46c47cee1282f612e.woff",
+    "static/media/maleAvatar.png": "/static/media/maleAvatar.f16cf02e002ca55e8c75.png",
+    "index.html": "/index.html",
+    "main.f0236354.css.map": "/static/css/main.f0236354.css.map",
+    "main.7c95e74b.js.map": "/static/js/main.7c95e74b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f0236354.css",
+    "static/js/main.7c95e74b.js"
+  ]
+}
