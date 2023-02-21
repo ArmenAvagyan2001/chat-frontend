@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import ModalDeleteRoom from "./ModalDeleteRoom";
@@ -24,6 +24,7 @@ const Room = ({room}) => {
         setOpenModal(true)
     }
 
+
     return (
         <>
             <div className='room-component' onClick={handleShowRoomClick}>
@@ -38,6 +39,9 @@ const Room = ({room}) => {
                                 {authUser.id === users[0].id && <p>(You)</p>}
                             </div>
                             <div className='settings'>
+                                <div>
+                                    {!!room.newMessagesCount && room.newMessagesCount}
+                                </div>
                                 <button>
                                     <i className="fa fa-trash" onClick={handleDeleteClick}></i>
                                 </button>

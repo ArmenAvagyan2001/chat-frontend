@@ -18,11 +18,10 @@ $api.interceptors.response.use((config) => {
     const originalRequest = error.config;
     if (error.response.status === 401 && error.config && !error.config._isRetry && window.localStorage.getItem('token')) {
         originalRequest._isRetry = true
-        await $api.get(`${API_URL}/api/refresh`)
+        await axios.get(`${API_URL}/api/refresh`, {withCredentials: true})
             .then(res => {
                 window.localStorage.setItem("token", res.data.accessToken)
-            }).catch(async ({response}) => {
-                console.log(response)
+            }).catch(() => {
                 window.localStorage.clear()
                 window.location.reload()
             })

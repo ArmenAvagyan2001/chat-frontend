@@ -10,7 +10,7 @@ import Typing from "./Typing";
 const Room = () => {
 
     const authUser = useSelector(state => state.items.user)
-    const socket = useRef(io('http://localhost:5000'))
+    const socket = useRef(io(process.env.REACT_APP_API_URL))
     const ref = useRef(null);
     const params = useParams()
     const navigate = useNavigate()

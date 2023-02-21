@@ -23,6 +23,9 @@
       }
 
       & > .settings {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         & > button {
           background: transparent;
           border: none;
@@ -30,6 +33,14 @@
           & > i {
             font-size: 22px;
           }
+        }
+
+        & > div {
+          padding: 0 5px;
+          border-radius: 100%;
+          background: rgba(0, 0, 0, 0.3);
+          width: auto;
+          height: auto;
         }
       }
     }

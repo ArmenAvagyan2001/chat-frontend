@@ -9,7 +9,7 @@ import AuthLayout from "./components/authLayout";
 import Rooms from "./views/Rooms";
 import Search from "./views/Search";
 import Room from "./views/Room";
-
+import './firebase'
 function App() {
 
     const {isAuth} = useSelector(state => state.items)
