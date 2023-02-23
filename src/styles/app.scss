@@ -6,13 +6,11 @@
 // components
 @import "src/styles/components/customs/button_custom";
 @import "src/styles/components/customs/input_custom";
-@import "src/styles/components/authLayout";
-@import "src/styles/components/header";
-@import "src/styles/components/modals";
-@import "src/styles/components/rooms/modalDeleteRoom";
+@import "src/styles/components/layout";
+@import "components/home/roomList";
+@import "components/avatar";
 
 //views
 @import "src/styles/views/login";
-@import "src/styles/views/rooms";
+@import "src/styles/views/home";
 @import "src/styles/views/room";
-@import "src/styles/views/search";

@@ -1,0 +1,126 @@
+.home {
+  flex-grow: 1;
+  background-color: #f4f3f8;
+  border-radius: 10px;
+  padding: 15px 20px;
+  display: flex;
+
+  & > .userProfile {
+    width: 20%;
+    padding: 0 20px 0 40px;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    position: relative;
+
+    & > .profile_card {
+      background-color: #fff;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transform: scale(0);
+      animation-name: showIn;
+      animation-duration: 0.2s; /* or: Xms */
+      animation-iteration-count: 1;
+      animation-direction: normal; /* or: normal */
+      animation-timing-function: cubic-bezier(
+                      0.17,
+                      0.67,
+                      0.12,
+                      1.53
+      ); /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
+      animation-fill-mode: both; /* or: backwards, both, none */
+      animation-delay: 0.3s; /* or: Xms */
+      margin-bottom: 15px;
+
+      & > .card_content {
+        transition: ease 0.5s;
+        transform: scale(0);
+        opacity: 0;
+        pointer-events: none;
+        height: 0;
+
+        & > .btn {
+          background-color: #fff;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          width: 230px;
+          height: 47px;
+          line-height: 47px;
+          border-radius: 5px;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.02);
+          display: flex;
+          padding: 0;
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            background-color: #4664ff;
+            color: #fff;
+            transform: scale(1.02);
+          }
+          & > i {
+            flex: 0.2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 18px;
+            border-right: 1px solid #ebe7fb;
+          }
+
+          & > span {
+            flex: 0.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+      }
+
+      & > .card_content.active {
+        opacity: 1;
+        pointer-events: all;
+        height: auto;
+        transition: ease 0.5s;
+        transform: scale(1);
+      }
+
+      & > .card_header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+
+        & > i {
+          margin-left: 10px;
+          transition: ease 0.5s;
+          cursor: pointer;
+        }
+
+        & > i.active {
+          transition: ease 0.5s;
+          transform: rotate(180deg);
+        }
+      }
+
+      & > .profile_image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        & > img {
+          object-fit: cover;
+          max-width: 100%;
+        }
+      }
+    }
+
+    & > .profile_card.user_profile_image {
+      padding: 20px 20px;
+    }
+  }
+}
