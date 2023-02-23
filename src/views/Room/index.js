@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import $api from "../../http";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import RoomHeader from "./RoomHeader";
 import RoomBody from "./RoomBody";
 import RoomFooter from "./RoomFooter";
@@ -31,13 +31,15 @@ const Room = () => {
 
     useEffect(() => {
         socket.current.on('message-receive', (data) => {
-            setMessages(prevState => [...prevState, data])
+            if (data.roomId === roomId) {
+                setMessages(prevState => [...prevState, data])
+            }
         })
     }, [])
 
     useEffect(() => {
         getRoom()
-        socket.current.emit('add-user', authUser.id)
+        socket.current.emit('add-room', {userId: authUser.id, roomId})
     },[roomId])
 
     return (

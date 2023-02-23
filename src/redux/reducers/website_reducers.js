@@ -1,8 +1,9 @@
-import {LOGIN, LOGOUT, SET_USER} from "../actions/types";
+import {LOGIN, LOGOUT, SET_ONLINE_USERS} from "../actions/types";
 
 const initialState = {
     isAuth: false,
-    user: {}
+    user: {},
+    onlineUsers: []
 }
 
 export default function (state = initialState, action) {
@@ -12,6 +13,8 @@ export default function (state = initialState, action) {
         case LOGOUT:
             localStorage.clear()
             return initialState
+        case SET_ONLINE_USERS:
+            return {...state, onlineUsers: action.payload.onlineUsers}
         default:
             return state
     }

@@ -1,21 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import $api from "../../http";
+import React from 'react';
 import RoomListItem from "./RoomListItem";
 
-const RoomList = () => {
+const RoomList = ({rooms = [], setRooms}) => {
 
-    const [rooms, setRooms] = useState([])
-
-    const getRooms = () => {
-        $api.get('/api/rooms')
-            .then(res => {
-                setRooms(res.data)
-            })
+    const sortRooms = (a, b) => {
+        return new Date(b.updatedAt) - new Date(a.updatedAt)
     }
-
-    useEffect(() => {
-        getRooms()
-    }, [])
 
     return (
         <div className='roomList'>
@@ -31,18 +21,19 @@ const RoomList = () => {
             </div>
             <div className="roomListSearch">
                 <div>
-                    <input type="text" placeholder="Search Here" required />
+                    <input type="text" placeholder="Search Here" required/>
                     <button className="search-btn">
                         <i className="fa fa-search"></i>
                     </button>
                 </div>
             </div>
             <div className="roomListItems">
-                {rooms.map((room, index) =>
+                {rooms.sort(sortRooms).map((room, index) =>
                     <RoomListItem
                         room={room}
                         key={room.id}
                         animationDelay={index + 1}
+                        setRooms={setRooms}
                     />
                 )}
             </div>

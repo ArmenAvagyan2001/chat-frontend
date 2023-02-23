@@ -26,7 +26,7 @@ const RoomHeader = ({users}) => {
             <div className="blocks">
                 <div>
                     <Avatar
-                        isOnline={true}
+                        isOnline={user.id === authUser.id}
                         image={user.avatar || userIcon}
                     />
                     <p>{user.firstName + " " + user.lastName}{user.id === authUser.id && (' (you)')}</p>

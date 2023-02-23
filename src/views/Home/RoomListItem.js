@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Avatar from "../../components/avatar";
 import {useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";
 import userIcon from "../../images/maleAvatar.png"
 
-const RoomListItem = ({room, animationDelay}) => {
+const RoomListItem = ({room, animationDelay, setRooms}) => {
 
     const navigate = useNavigate()
     const {pathname} = useLocation()
+    const [isOnline, setIsOnline] = useState(false)
     const authUser = useSelector(state => state.items.user)
+    const {onlineUsers} = useSelector(state => state.items)
     let users = room.users.filter(user => user.id !== authUser.id)
     let user;
 
@@ -26,7 +28,18 @@ const RoomListItem = ({room, animationDelay}) => {
 
     const handleRoomShow = () => {
         navigate('rooms/' + room.id)
+        setRooms(prev => prev.map(item => {
+            if (item.id === room.id) {
+                return {...item, newMessagesCount: 0}
+            }
+
+            return item
+        }))
     }
+
+    useEffect(() => {
+        setIsOnline(onlineUsers.includes(user.id))
+    }, [onlineUsers])
 
     return (
         <div
@@ -36,11 +49,12 @@ const RoomListItem = ({room, animationDelay}) => {
         >
             <Avatar
                 image={user.avatar || userIcon}
-                isOnline={false}
+                isOnline={authUser.id === user.id || isOnline}
             />
             <div className="userMeta">
                 <p>{user.firstName + " " + user.lastName}{user.id === authUser.id && (' (you)')}</p>
                 <span className="activeTime">32 minuts ago</span>
+                {room.newMessagesCount > 0 && <div className='newMessagesCount'><span>{room.newMessagesCount}</span></div>}
             </div>
         </div>
     );
