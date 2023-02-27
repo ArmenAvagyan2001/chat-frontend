@@ -8,7 +8,6 @@ const RoomFooter = ({scrollRef, setMessages, users}) => {
 
     const {id: roomId} = useParams()
     const [message, setMessage] = useState("")
-    const socket = useRef(io(process.env.REACT_APP_API_URL))
     const authUser = useSelector(state => state.items.user)
 
     const handleChange = (e) => {
@@ -25,7 +24,7 @@ const RoomFooter = ({scrollRef, setMessages, users}) => {
         $api.post('/api/messages', data)
             .then(res => {
                 setMessages(prev => [...prev, res.data])
-                socket.current.emit('send-message', {message: res.data, users: users.filter(user => user.id !== authUser.id)})
+                global.socket.current.emit('send-message', {message: res.data, users: users.filter(user => user.id !== authUser.id)})
                 scrollRef.current.scrollIntoView({ behavior: "smooth" });
             })
     }

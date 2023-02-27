@@ -23,7 +23,7 @@ const RoomBodyItem = ({animationDelay, message}) => {
                     <span>{moment(message.createdAt).format('LT')}</span>
                 </div>
             </div>
-            <Avatar isOnline={user.id === message.sender._id || isOnline} image={message.sender.avatar || userIcon} />
+            <Avatar isOnline={isOnline} image={message.sender.avatar || userIcon} />
         </div>
     );
 };

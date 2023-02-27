@@ -1,11 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import RoomListItem from "./RoomListItem";
+import $api from "../../http";
+import SearchedUser from "./SearchedUser";
 
 const RoomList = ({rooms = [], setRooms}) => {
+
+    const [searchedUsers, setSearchedUsers] = useState([])
+    const [search, setSearch] = useState('')
 
     const sortRooms = (a, b) => {
         return new Date(b.updatedAt) - new Date(a.updatedAt)
     }
+
+    const handleChange = (e) => {
+        setSearch(e.target.value)
+    }
+
+    useEffect(() => {
+        if (search) {
+            $api.get('/api/users/' + search)
+                .then(res => {
+                    setSearchedUsers(res.data)
+                })
+        } else {
+            setSearchedUsers([])
+        }
+    }, [search])
 
     return (
         <div className='roomList'>
@@ -21,21 +41,41 @@ const RoomList = ({rooms = [], setRooms}) => {
             </div>
             <div className="roomListSearch">
                 <div>
-                    <input type="text" placeholder="Search Here" required/>
+                    <input
+                        type="text"
+                        placeholder="Search Here"
+                        value={search}
+                        onChange={handleChange}
+                    />
                     <button className="search-btn">
                         <i className="fa fa-search"></i>
                     </button>
                 </div>
             </div>
             <div className="roomListItems">
-                {rooms.sort(sortRooms).map((room, index) =>
-                    <RoomListItem
-                        room={room}
-                        key={room.id}
-                        animationDelay={index + 1}
-                        setRooms={setRooms}
-                    />
-                )}
+                {searchedUsers.length || search
+                    ? <>
+                        {searchedUsers.map((user, index) =>
+                            <SearchedUser user={user}
+                                          key={user.id}
+                                          animationDelay={index + 1}
+                                          setRooms={setRooms}
+                                          setSearchedUsers={setSearchedUsers}
+                                          setSearch={setSearch}
+                            />
+                        )}
+                    </>
+                    : <>
+                        {rooms.sort(sortRooms).map((room, index) =>
+                            <RoomListItem
+                                room={room}
+                                key={room.id}
+                                animationDelay={index + 1}
+                                setRooms={setRooms}
+                            />
+                        )}
+                    </>}
+
             </div>
         </div>
     );

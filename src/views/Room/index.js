@@ -1,10 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import $api from "../../http";
-import {useLocation, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import RoomHeader from "./RoomHeader";
 import RoomBody from "./RoomBody";
 import RoomFooter from "./RoomFooter";
-import {io} from "socket.io-client";
 import {useSelector} from "react-redux";
 
 const Room = () => {
@@ -14,7 +13,6 @@ const Room = () => {
     const [users, setUsers] = useState([])
     const [limit] = useState(20)
     const scrollRef = useRef()
-    const socket = useRef(io(process.env.REACT_APP_API_URL))
     const authUser = useSelector(state => state.items.user)
     const [loading, setLoading] = useState(false)
 
@@ -30,17 +28,19 @@ const Room = () => {
     }
 
     useEffect(() => {
-        socket.current.on('message-receive', (data) => {
-            if (data.roomId === roomId) {
+        if (global.socket) {
+            global.socket.current.on('message-receive', (data) => {
                 setMessages(prevState => [...prevState, data])
-            }
-        })
-    }, [])
+            })
+        }
+    }, [global.socket])
 
     useEffect(() => {
         getRoom()
-        socket.current.emit('add-room', {userId: authUser.id, roomId})
-    },[roomId])
+        if (global.socket) {
+            global.socket.current.emit('add-room', {userId: authUser.id, roomId})
+        }
+    },[global.socket, roomId])
 
     return (
         <div className='room'>

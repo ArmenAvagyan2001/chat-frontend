@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Avatar from "../../components/avatar";
 import {useSelector} from "react-redux";
 import userIcon from "../../images/maleAvatar.png"
 
 const RoomHeader = ({users}) => {
 
+    const [isOnline, setIsOnline] = useState(false)
     const authUser = useSelector(state => state.items.user)
+    const {onlineUsers} = useSelector(state => state.items)
     users = users.filter(user => user.id !== authUser.id)
     let user;
 
@@ -21,12 +23,18 @@ const RoomHeader = ({users}) => {
         console.log('????')
     }
 
+    useEffect(() => {
+        if (user) {
+            setIsOnline(onlineUsers.includes(user.id))
+        }
+    }, [])
+
     return (
         <div className='roomHeader'>
             <div className="blocks">
                 <div>
                     <Avatar
-                        isOnline={user.id === authUser.id}
+                        isOnline={isOnline}
                         image={user.avatar || userIcon}
                     />
                     <p>{user.firstName + " " + user.lastName}{user.id === authUser.id && (' (you)')}</p>

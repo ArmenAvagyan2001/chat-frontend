@@ -22,6 +22,7 @@ const Home = () => {
 
     useEffect(() => {
         socket.current.emit('add-user', authUser.id)
+        global.socket = socket
     }, [])
 
     useEffect(() => {
@@ -32,23 +33,19 @@ const Home = () => {
         socket.current.on('get-online-users', (onlineUsers) => {
             dispatch(setOnlineUsers(onlineUsers))
         })
-
-        socket.current.on('disconnect', (data) => {
-            console.log('disconnect')
-        })
     }, [])
 
     useEffect(() => {
-            socket.current.on('set-messages-count', (id) => {
-                setRooms(prev =>
-                    prev.map(room => {
-                        if (room.id === id) {
-                            return {...room, newMessagesCount: room.newMessagesCount + 1}
-                        }
-                        return room
-                    })
-                )
-            })
+        socket.current.on('set-messages-count', (id) => {
+            setRooms(prev =>
+                prev.map(room => {
+                    if (room.id === id) {
+                        return {...room, newMessagesCount: room.newMessagesCount + 1, updatedAt: new Date()}
+                    }
+                    return room
+                })
+            )
+        })
     }, [])
 
     return (

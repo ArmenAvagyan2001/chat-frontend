@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Avatar from "../../components/avatar";
 import {useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";
@@ -49,7 +49,7 @@ const RoomListItem = ({room, animationDelay, setRooms}) => {
         >
             <Avatar
                 image={user.avatar || userIcon}
-                isOnline={authUser.id === user.id || isOnline}
+                isOnline={isOnline}
             />
             <div className="userMeta">
                 <p>{user.firstName + " " + user.lastName}{user.id === authUser.id && (' (you)')}</p>

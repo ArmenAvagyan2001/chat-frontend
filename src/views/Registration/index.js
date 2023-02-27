@@ -10,7 +10,6 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [lastName, setLastName] = useState('');
     const [firstName, setFirstName] = useState('');
-    const [gender, setGender] = useState('');
     const [successMessage, setSuccessMessage] = useState(null)
     const [loading, setLoading] = useState(false)
 
@@ -24,7 +23,7 @@ const Register = () => {
 
     const handleRegistrationClick = () => {
         setLoading(true)
-        $api.post('/api/registration', {email, password, lastName, firstName, gender})
+        $api.post('/api/registration', {email, password, lastName, firstName})
             .then(res => {
                 setSuccessMessage(res.data.message)
             }).catch(({response}) => {
@@ -80,11 +79,6 @@ const Register = () => {
                                 value={lastName}
                                 onChange={e => setLastName(e.target.value)}
                             />
-                            <br/><br/>
-                            <select value={gender} onChange={e => setGender(e.target.value)}>
-                                <option value="male">male</option>
-                                <option value="female">female</option>
-                            </select>
                             <br/><br/>
                             {email.match(emailRegex) && password.length >= 6 && firstName.length >= 2 && lastName.length >= 2
                                 ? <ButtonCustom
