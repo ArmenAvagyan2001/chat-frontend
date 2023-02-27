@@ -37,14 +37,19 @@ const Home = () => {
 
     useEffect(() => {
         socket.current.on('set-messages-count', (id) => {
-            setRooms(prev =>
-                prev.map(room => {
-                    if (room.id === id) {
-                        return {...room, newMessagesCount: room.newMessagesCount + 1, updatedAt: new Date()}
-                    }
-                    return room
-                })
-            )
+            console.log(id)
+            if (rooms.find(room => room.id === id)) {
+                setRooms(prev =>
+                    prev.map(room => {
+                        if (room.id === id) {
+                            return {...room, newMessagesCount: room.newMessagesCount + 1, updatedAt: new Date()}
+                        }
+                        return room
+                    })
+                )
+            } else {
+                getRooms()
+            }
         })
     }, [])
 

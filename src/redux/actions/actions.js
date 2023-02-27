@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT, SET_ONLINE_USERS} from "./types";
+import {LOGIN, LOGOUT, SET_ONLINE_USERS, SET_USER} from "./types";
 
 
 export const login = (user) => dispatch => {
@@ -11,6 +11,13 @@ export const login = (user) => dispatch => {
 export const logout = () => dispatch => {
     dispatch({
         type: LOGOUT
+    })
+}
+
+export const setUser = (user) => dispatch => {
+    dispatch({
+        type: SET_USER,
+        payload: {user}
     })
 }
 

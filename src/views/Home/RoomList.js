@@ -59,7 +59,6 @@ const RoomList = ({rooms = [], setRooms}) => {
                             <SearchedUser user={user}
                                           key={user.id}
                                           animationDelay={index + 1}
-                                          setRooms={setRooms}
                                           setSearchedUsers={setSearchedUsers}
                                           setSearch={setSearch}
                             />

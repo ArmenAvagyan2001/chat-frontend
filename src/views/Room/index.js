@@ -50,7 +50,7 @@ const Room = () => {
                 </>
                 : <>
                     <RoomHeader users={users} />
-                    <RoomBody messages={messages} scrollRef={scrollRef}/>
+                    <RoomBody messages={messages} setMessages={setMessages} scrollRef={scrollRef} roomId={roomId}/>
                     <RoomFooter scrollRef={scrollRef} setMessages={setMessages} users={users} />
                 </>
             }

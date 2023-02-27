@@ -23,7 +23,6 @@ const Login = () => {
         setLoading(true)
         $api.post('/api/login', {email, password})
             .then(res => {
-                console.log(res.data)
                 localStorage.setItem('token', res.data.accessToken)
                 dispatch(login(res.data.user))
             })

@@ -5,26 +5,18 @@ import {useSelector} from "react-redux";
 import $api from "../../http";
 import {useNavigate} from "react-router-dom";
 
-const SearchedUser = ({animationDelay, user, setRooms, setSearchedUsers, setSearch}) => {
+const SearchedUser = ({animationDelay, user, setSearchedUsers, setSearch}) => {
 
     const authUser = useSelector(state => state.items.user)
     const navigate = useNavigate()
 
     const handleUserClick = () => {
-        $api.post('/api/rooms', {users: [user.id, authUser.id]})
+        const data = {users: [user.id, authUser.id]}
+        $api.post('/api/rooms', data)
             .then((res) => {
-                setRooms(prev => {
-                    const existRoom = prev.find(room => room.id === res.data.id)
-                    if (!existRoom) {
-                        navigate("/rooms/" + res.data.id)
-                        navigate(0)
-                    }
-                    setSearchedUsers([])
-                    setSearch('')
-
-
-                    return prev
-                })
+                navigate('rooms/' + res.data.id)
+                setSearchedUsers([])
+                setSearch('')
             })
     }
 

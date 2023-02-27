@@ -14,6 +14,7 @@ const RoomBodyItem = ({animationDelay, message}) => {
         setIsOnline(onlineUsers.includes(message.sender._id))
     }, [onlineUsers])
 
+
     return (
         <div className={`roomItem ${user.id !== message.sender._id && 'other'}`} style={{animationDelay: `0.${animationDelay}s`}}>
             <div className="room_item_content">
@@ -23,7 +24,7 @@ const RoomBodyItem = ({animationDelay, message}) => {
                     <span>{moment(message.createdAt).format('LT')}</span>
                 </div>
             </div>
-            <Avatar isOnline={isOnline} image={message.sender.avatar || userIcon} />
+            <Avatar isOnline={isOnline} image={message.sender.avatar && process.env.REACT_APP_API_URL + "/" + message.sender.avatar || userIcon} />
         </div>
     );
 };
