@@ -26,7 +26,6 @@ const RoomBody = ({messages = [], scrollRef, roomId, setMessages}) => {
             $api.get(`/api/rooms/${roomId}?page=${page}&limit=20`)
                 .then(res => {
                     setMessages([...res.data.messages, ...messages])
-                    console.log(res.data)
                     if (res.data.messages.length < 20) {
                         setShowChildren(false)
                     } else {

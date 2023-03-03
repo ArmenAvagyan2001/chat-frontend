@@ -37,7 +37,6 @@ const Home = () => {
 
     useEffect(() => {
         socket.current.on('set-messages-count', (id) => {
-            console.log(id)
             if (rooms.find(room => room.id === id)) {
                 setRooms(prev =>
                     prev.map(room => {
