@@ -5,6 +5,10 @@
   overflow: hidden;
   position: relative;
 
+  @media (max-width: 1600px) {
+    display: none;
+  }
+
   & > .profile_card {
     background-color: #fff;
     border-radius: 10px;
