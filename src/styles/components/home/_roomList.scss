@@ -2,10 +2,6 @@
   border-right: 1px solid #ebe7fb;
   padding: 0 40px 0 0;
 
-  @media (max-width: 789px) {
-    width: 100%;
-  }
-
   & > .roomListHeading {
     display: flex;
     justify-content: space-between;

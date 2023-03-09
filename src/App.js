@@ -13,9 +13,6 @@ import Room from "./views/Room";
 function App() {
 
     const {isAuth} = useSelector(state => state.items)
-    const SCREEN_WIDTH = window.innerWidth
-
-    console.log(SCREEN_WIDTH)
 
     return (
             <Routes>
@@ -24,9 +21,8 @@ function App() {
                         <Route path='/' element={<Layout />}>
                             <Route path='' element={<Home />}>
                                 <Route index  element={<HomeContent />} />
-                                {SCREEN_WIDTH > 1600 && <Route path='rooms/:id' element={<Room />} />}
+                                <Route path='rooms/:id' element={<Room />} />
                             </Route>
-                            {SCREEN_WIDTH < 1600 && <Route path='rooms/:id' element={<Room />} />}
                             <Route path='*' element={<Navigate to='/' />} />
                         </Route>
                     </>
