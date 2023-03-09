@@ -12,10 +12,12 @@ const SuccessMessages = ({message}) => {
                 {message}
             </p>
             <br/><br/>
-            <ButtonCustom
-                text='Go Next'
-                onClick={() => navigate('/login')}
-            />
+            <button className='btn'
+                    style={{width: '100%'}}
+                    onClick={() => navigate('/login')}
+            >
+                <span>Go Next</span>
+            </button>
         </div>
     );
 };

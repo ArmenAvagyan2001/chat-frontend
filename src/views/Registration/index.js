@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import InputCustom from "../../components/customs/InputCustom";
 import ButtonCustom from "../../components/customs/ButtonCustom";
 import $api from "../../http";
@@ -21,6 +21,8 @@ const Register = () => {
 
     const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
+    const passwordRef = useRef(null)
+
     const handleRegistrationClick = () => {
         setLoading(true)
         $api.post('/api/registration', {email, password, lastName, firstName})
@@ -36,63 +38,81 @@ const Register = () => {
         })
     }
 
+    const handleShowPassword = () => {
+        const ref = passwordRef.current
+        if (ref.type === 'password') {
+            ref.type = 'text'
+        } else {
+            ref.type = 'password'
+        }
+    }
+
     return (
         <section className='register'>
             <div className='component'>
                 <div className='icon'>
-
+                    <img src={require('../../images/logo.png')} alt="logo" draggable={false}/>
                 </div>
                 <div className='register_form'>
                     {successMessage
                         ? <SuccessMessages message={successMessage}/>
                         : <>
-                            <InputCustom
-                                id='register_email'
-                                label='E-Mail Address'
-                                error={emailErr}
-                                value={email}
-                                onChange={e => setEmail(e.target.value)}
-                            />
+                            <div className='custom_input'>
+                                <input
+                                    type="text"
+                                    value={email}
+                                    placeholder='Email'
+                                    onChange={e => setEmail(e.target.value)}
+                                />
+                            </div>
+                            <span>{emailErr}</span>
                             <br/><br/>
-                            <InputCustom
-                                id='register_password'
-                                label='Password'
-                                error={passwordErr}
-                                type='password'
-                                button={true}
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
-                            />
+                            <div className='custom_input'>
+                                <input
+                                    type="password"
+                                    value={password}
+                                    placeholder='Password'
+                                    onChange={e => setPassword(e.target.value)}
+                                    ref={passwordRef}
+                                />
+                                <button style={{color: '#4664ff'}} onClick={handleShowPassword}>
+                                    <i className="fa fa-eye"></i>
+                                </button>
+                            </div>
+                            <span>{passwordErr}</span>
                             <br/><br/>
-                            <InputCustom
-                                id='register_first_name'
-                                label='First Name'
-                                error={firstNameErr}
-                                value={firstName}
-                                onChange={e => setFirstName(e.target.value)}
-                            />
+                            <div className='custom_input'>
+                                <input
+                                    type="text"
+                                    value={firstName}
+                                    placeholder='First Name'
+                                    onChange={e => setFirstName(e.target.value)}
+                                />
+                            </div>
+                            <span>{firstNameErr}</span>
                             <br/><br/>
-                            <InputCustom
-                                id='register_last_name'
-                                label='Last Name'
-                                error={lastNameErr}
-                                value={lastName}
-                                onChange={e => setLastName(e.target.value)}
-                            />
+                            <div className='custom_input'>
+                                <input
+                                    type="text"
+                                    value={lastName}
+                                    placeholder='Last Name'
+                                    onChange={e => setLastName(e.target.value)}
+                                />
+                            </div>
+                            <span>{lastNameErr}</span>
                             <br/><br/>
-                            {email.match(emailRegex) && password.length >= 6 && firstName.length >= 2 && lastName.length >= 2
-                                ? <ButtonCustom
-                                    text="Let's Go"
-                                    cursor='pointer'
-                                    loading={loading}
+                            <button className='btn'
+                                    style={{width: "100%"}}
                                     onClick={handleRegistrationClick}
-                                />
-                                : <ButtonCustom
-                                    text="Let's Go"
-                                    backgroundColor='#b2dffc'
-
-                                />
-                            }
+                                    disabled={!(email.match(emailRegex) && password.length >= 6 && firstName.length >= 2 && lastName.length >= 2)}
+                            >
+                                {loading && (
+                                    <i>
+                                        <i  className='fa fa-circle-o-notch fa-spin'></i>
+                                    </i>
+                                )}
+                                <span>Let's Go</span>
+                            </button>
                         </>
                     }
                 </div>

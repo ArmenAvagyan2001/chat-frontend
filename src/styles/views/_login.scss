@@ -8,7 +8,8 @@
     background: rgba(255, 255, 255);
     position: relative;
     width: 400px;
-    border: 2px solid rgb(216 89 140);
+    border-radius: 10px;
+    background: #f4f3f8;
 
     & > .icon {
       display: flex;
@@ -25,6 +26,11 @@
       margin: 20px 0;
       position: relative;
 
+      & > span {
+        color: red;
+        font-size: 14px;
+      }
+
       .error_message {
         font-size: 15px;
         color: red;
@@ -32,6 +38,7 @@
         margin: 20px 0;
         transition: all 0.1s linear;
       }
+
 
       & > select {
         width: 100%;
@@ -62,7 +69,7 @@
         justify-content: center;
         margin: 10px 0;
         & > a {
-          color: #0095F6;
+          color: #4664ff;
           margin: 0 10px;
         }
       }
